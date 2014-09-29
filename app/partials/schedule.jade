@@ -71,6 +71,11 @@ block content
   include ../../i18n/gen/schedule.jade
   .row
     .col-sm-12
+      case lang
+        when 'en'
+          include ../content/en/schedule.jade
+        default
+          include ../content/zh/schedule.jade
       h5 Day 1 / Conference 國際研討會
         p
         img(src='/images/icons/png/s-date.png', align='middle')
