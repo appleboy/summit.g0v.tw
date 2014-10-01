@@ -3,6 +3,17 @@ extends ../layout/page
 mixin get(obj,name)
   | #{obj[name+"_"+lang] || obj[name]}
 
+mixin topics_brief(time)
+  each room in [["r1",294,"danger"],["r2",247,"success"],["r3",247,"warning"],["r4",250,"info"]]
+    - var obj = i18n[room[0]+"_"+time+"_topic"]
+    - var desc = obj["desc_"+lang] || obj["desc"]
+    h5
+      +get(obj, "title")
+    p
+      each p in desc
+        span= p
+    br
+
 mixin topicslots_title(time)
   //- TODO use css to color block and set width
   tr
@@ -70,6 +81,20 @@ block content
   - var rooms = ["r1","r2","r3","r4"]
   include ../../i18n/gen/schedule.jade
   .row
+    h3 議程簡介
+    h4 關於首屆 g0v summit 議程
+    p 內容未定待補完
+    h4 Conference
+    blockquote.session-brief
+      +topics_brief('am')
+      +topics_brief('pm')
+      br
+
+    h3 Unconference
+    p 內容未定待補完
+    hr
+    br
+
     .col-sm-12
       h5 Day 1 / Conference 國際研討會
         p
@@ -107,7 +132,7 @@ block content
               span(style='font-size:14px;') (10 mins)
 
         +topicslots_title("am")
-        +topicslots_desc("am")
+        //-+topicslots_desc("am")
         +timeslots("9:50 - 10:20", "0950")
         +timeslots("10:20 - 10:50", "1020")
 
@@ -128,8 +153,9 @@ block content
               | LUNCH    
               span(style='font-size:14px;') (70 mins)
 
+        tr
         +topicslots_title("pm")
-        +topicslots_desc("pm")
+        //-+topicslots_desc("pm")
         +timeslots("13:30 - 14:00", "1330")
         +timeslots("14:10 - 14:40", "1410")
         +timeslots("14:40 - 15:10", "1440")
