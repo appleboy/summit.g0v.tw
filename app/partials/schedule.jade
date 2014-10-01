@@ -6,12 +6,17 @@ mixin get(obj,name)
 mixin topics_brief(time)
   each room in [["r1",294,"danger"],["r2",247,"success"],["r3",247,"warning"],["r4",250,"info"]]
     - var obj = i18n[room[0]+"_"+time+"_topic"]
-    - var desc = obj["desc_"+lang] || obj["desc"]
+    - var desc = obj["desc_zh"] || obj["desc"]
     h5
       +get(obj, "title")
     p
       each p in desc
         span= p
+    if obj["desc_zh"]
+      - var desc = obj["desc_en"] || obj["desc"]
+      p
+        each p in desc
+          span= p
     br
 
 mixin topicslots_title(time)
